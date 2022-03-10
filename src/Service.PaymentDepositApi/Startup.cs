@@ -28,12 +28,18 @@ namespace Service.PaymentDepositApi
 			services.ConfigurateHeaders();
 			services.AddControllers();
 			services.ConfigureAuthentication();
+			services.AddCors();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
 				app.UseDeveloperExceptionPage();
+
+			app.UseCors(builder => builder
+				.AllowAnyOrigin()
+				.AllowAnyMethod()
+				.AllowAnyHeader());
 
 			app.UseForwardedHeaders();
 			app.UseRouting();

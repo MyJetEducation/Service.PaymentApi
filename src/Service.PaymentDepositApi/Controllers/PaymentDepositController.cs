@@ -24,6 +24,7 @@ namespace Service.PaymentDepositApi.Controllers
 		[Authorize]
 		[HttpPost("deposit")]
 		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<StatusResponse>))]
+		[SwaggerResponse(HttpStatusCode.Redirect, null, Description = "Redirect to external payment validator")]
 		public async ValueTask<IActionResult> DepositAsync([FromBody] DepositRequest request)
 		{
 			Guid? userId = GetUserId();
