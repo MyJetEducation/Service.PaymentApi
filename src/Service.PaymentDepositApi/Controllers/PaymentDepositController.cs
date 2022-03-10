@@ -43,13 +43,9 @@ namespace Service.PaymentDepositApi.Controllers
 		[AllowAnonymous]
 		[HttpGet("callback-test")]
 		[SwaggerResponse(HttpStatusCode.OK, typeof (StatusResponse), Description = "Status")]
-		public async ValueTask<IActionResult> CallbackTestAsync([FromBody] CallbackTestRequest request)
+		public async ValueTask<IActionResult> CallbackTestAsync([FromQuery] CallbackTestRequest request)
 		{
-			Guid? userId = GetUserId();
-			if (userId == null)
-				return StatusResponse.Error(ResponseCode.UserNotFound);
-
-			await _paymentDepositService.Service.CallbackAsync(request.ToGrpcModel(userId));
+			await _paymentDepositService.Service.CallbackAsync(request.ToGrpcModel());
 
 			return Ok();
 		}

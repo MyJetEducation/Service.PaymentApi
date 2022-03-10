@@ -1,5 +1,4 @@
-﻿using System;
-using Service.PaymentDeposit.Grpc.Models;
+﻿using Service.PaymentDeposit.Grpc.Models;
 using Service.PaymentDepositApi.Models;
 using Service.PaymentDepositRepository.Domain.Models;
 
@@ -7,9 +6,8 @@ namespace Service.PaymentDepositApi.Mappers
 {
 	public static class CallbackMapper
 	{
-		public static CallbackGrpcRequest ToGrpcModel(this CallbackTestRequest request, Guid? userId) => new CallbackGrpcRequest
+		public static CallbackGrpcRequest ToGrpcModel(this CallbackTestRequest request) => new CallbackGrpcRequest
 		{
-			UserId = userId,
 			TransactionId = request.TransactionId,
 			ExternalId = request.ExternalId,
 			State = GetState(request.State)
