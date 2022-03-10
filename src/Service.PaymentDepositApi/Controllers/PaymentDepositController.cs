@@ -41,7 +41,7 @@ namespace Service.PaymentDepositApi.Controllers
 		}
 
 		[AllowAnonymous]
-		[HttpPost("callback-test")]
+		[HttpGet("callback-test")]
 		[SwaggerResponse(HttpStatusCode.OK, typeof (StatusResponse), Description = "Status")]
 		public async ValueTask<IActionResult> CallbackTestAsync([FromBody] CallbackTestRequest request)
 		{
