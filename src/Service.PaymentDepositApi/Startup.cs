@@ -27,16 +27,9 @@ namespace Service.PaymentDepositApi
 			services.SetupSwaggerDocumentation(DocumentName, ApiName);
 			services.ConfigurateHeaders();
 			services.AddControllers();
-
-			//services.AddCors(options =>
-			//{
-			//	options.AddPolicy("CorsApi",
-			//		builder => builder.WithOrigins("http://localhost")
-			//			.AllowAnyHeader()
-			//			.AllowAnyMethod());
-			//});
-
 			services.ConfigureAuthentication();
+
+			services.AddControllersWithViews(); //to-do: remove
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -46,7 +39,6 @@ namespace Service.PaymentDepositApi
 
 			app.UseForwardedHeaders();
 			app.UseRouting();
-			app.UseCors("CorsApi"); //TODO: temporary
 			app.UseStaticFiles();
 			app.UseMetricServer();
 			app.BindServicesTree(Assembly.GetExecutingAssembly());
@@ -60,6 +52,9 @@ namespace Service.PaymentDepositApi
 			{
 				endpoints.MapControllers();
 				endpoints.MapGet("/", async context => await context.Response.WriteAsync("API endpoint"));
+				
+				endpoints.MapGet("/api/v1/paymentdeposit/payment-ok", async context => await context.Response.WriteAsync("Payment COMPLETE!")); //to-do: remove
+				endpoints.MapGet("/api/v1/paymentdeposit/payment-fail", async context => await context.Response.WriteAsync("Payment FAIL!")); //to-do: remove
 			});
 		}
 

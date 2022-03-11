@@ -16,6 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.3.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
+    <PackageReference Include="Castle.Core" Version="4.4.0" />
     <PackageReference Include="MyJetEducation.Service.PaymentDeposit.Client" Version="1.0.2" />
     <PackageReference Include="MyJetEducation.Service.PaymentDepositRepository.Client" Version="1.0.0" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.9.0" />

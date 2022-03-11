@@ -2,7 +2,6 @@
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using Service.Grpc;
@@ -14,7 +13,6 @@ using Service.Web;
 
 namespace Service.PaymentDepositApi.Controllers
 {
-	[EnableCors("CorsApi")]
 	[OpenApiTag("PaymentDeposit", Description = "payment deposit")]
 	[Route("/api/v1/paymentdeposit")]
 	public class PaymentDepositController : BaseController
@@ -51,6 +49,15 @@ namespace Service.PaymentDepositApi.Controllers
 			await _paymentDepositService.Service.CallbackAsync(request.ToGrpcModel());
 
 			return Ok();
+		}
+
+		/// <summary>
+		///     to-do: remove
+		/// </summary>
+		[HttpGet("payment")]
+		public ViewResult PaymentTest()
+		{
+			return View("PaymentTest");
 		}
 	}
 }

@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+    <script>
+        $(function() {
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "POST",
+                url: "https://api.dfnt.work/api/v1/auth/login",
+                data: JSON.stringify({ "userName": "user@domain.com", "password": "Qwerty+123" }),
+                dataType: "json",
+                success: function(result) {
+                    window.token = result.data.token;
+                },
+                error: function(jqXhr, exception) {
+                    alert(jqXhr.responseText + "\r\n" + jqXhr.statusText);
+                }
+            });
+
+            $("#sendForm").submit(function(event) {
+                event.preventDefault();
+
+                var token = window.token;
+                if (token == null || token == undefined) {
+                    alert("No token!");
+                    return;
+                }
+
+                var array = $(this).serializeArray();
+                var loginFormObject = {};
+                $.each(array, function(i, v) {
+                    loginFormObject[v.name] = v.value;
+                });
+
+                $.ajax({
+                    headers: {
+                        'Authorization': 'Bearer ' + window.token
+                    },
+                    type: "POST",
+                    url: "https://api.dfnt.work/api/v1/paymentdeposit/deposit",
+                    data: JSON.stringify(loginFormObject),
+                    complete: function(jqXhr, textStatus) {
+                        if (jqXhr.status !== 200)
+                            alert(jqXhr.responseText + "\r\n" + jqXhr.statusText);
+                    },
+                    contentType: "application/json"
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div id="content">
+    <form id="sendForm">
+        <p><label>amount: </label><input type="text" name="amount" value="10" /></p>
+        <p><label>currency: </label><input type="text" name="currency" value="USD" /></p>
+        <p><label>country: </label><input type="text" name="country" value="USA" /></p>
+        <p><label>number: </label><input type="text" name="number" value="1234123412341234" /></p>
+        <p><label>holder: </label><input type="text" name="holder" value="Peter Falk" /></p>
+        <p><label>month: </label><input type="text" name="month" value="01" /></p>
+        <p><label>year: </label><input type="text" name="year" value="22" /></p>
+        <p><label>cvv: </label><input type="text" name="cvv" value="345" /></p>
+        <input type="submit" value="OK"/>
+    </form>
+</div>
+</body>
+</html>
