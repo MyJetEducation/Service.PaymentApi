@@ -23,7 +23,7 @@ namespace Service.PaymentDepositApi.Controllers
 
 		[Authorize]
 		[HttpPost("deposit")]
-		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<StatusResponse>))]
+		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<DepositResponse>))]
 		[SwaggerResponse(HttpStatusCode.Redirect, null, Description = "Redirect to external payment validator")]
 		public async ValueTask<IActionResult> DepositAsync([FromBody] DepositRequest request)
 		{
@@ -36,7 +36,7 @@ namespace Service.PaymentDepositApi.Controllers
 				return StatusResponse.Ok();
 
 			if (response.RedirectUrl != null)
-				return Redirect(response.RedirectUrl);
+				return DataResponse<DepositResponse>.Ok(new DepositResponse(response.RedirectUrl));
 
 			return StatusResponse.Error();
 		}

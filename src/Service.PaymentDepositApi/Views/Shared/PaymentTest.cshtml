@@ -9,6 +9,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
     <script>
         $(function() {
+            
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -30,7 +31,7 @@
                 event.preventDefault();
 
                 var token = window.token;
-                if (token == null || token == undefined) {
+                if (token == null) {
                     alert("No token!");
                     return;
                 }
@@ -43,22 +44,27 @@
 
                 $.ajax({
                     headers: {
-                        'Authorization': 'Bearer ' + window.token,
-                        'Access-Control-Allow-Origin': '*'
+                        'Authorization': 'Bearer ' + window.token
                     },
                     type: "POST",
-                    cors: true ,
-                    crossDomain: true, 
-                    xhrFields: { withCredentials: true },
-                    url: "https://api.dfnt.work/api/v1/paymentdeposit/deposit",
+                    dataType: "json",
                     data: JSON.stringify(loginFormObject),
-                    complete: function(jqXhr, textStatus) {
-                        if (jqXhr.status !== 200)
-                            alert(jqXhr.responseText + "\r\n" + jqXhr.statusText);
+                    url: "http://api.dfnt.work/api/v1/paymentdeposit/deposit",
+                    success: function(response) {
+                        if (response.status === -1)
+                            alert("error");
+                        if (response.status === -2)
+                            alert("user not found");
+                        if (response.status === 0)
+                            window.location = response.data.redirectUrl;
+                    },
+                    error: function(xhr, desc, err) {
+                        alert("error");
                     },
                     contentType: "application/json"
                 });
             });
+
         });
     </script>
 </head>
