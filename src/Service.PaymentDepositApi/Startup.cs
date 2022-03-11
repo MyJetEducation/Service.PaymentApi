@@ -28,13 +28,13 @@ namespace Service.PaymentDepositApi
 			services.ConfigurateHeaders();
 			services.AddControllers();
 
-			services.AddCors(options =>
-			{
-				options.AddPolicy("CorsApi",
-					builder => builder.WithOrigins("http://localhost:3000", "http://localhost")
-						.AllowAnyHeader()
-						.AllowAnyMethod());
-			});
+			//services.AddCors(options =>
+			//{
+			//	options.AddPolicy("CorsApi",
+			//		builder => builder.WithOrigins("http://localhost")
+			//			.AllowAnyHeader()
+			//			.AllowAnyMethod());
+			//});
 
 			services.ConfigureAuthentication();
 		}
