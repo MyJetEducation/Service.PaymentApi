@@ -43,7 +43,8 @@
 
                 $.ajax({
                     headers: {
-                        'Authorization': 'Bearer ' + window.token
+                        'Authorization': 'Bearer ' + window.token,
+                        'Access-Control-Allow-Origin': '*'
                     },
                     type: "POST",
                     url: "https://api.dfnt.work/api/v1/paymentdeposit/deposit",
