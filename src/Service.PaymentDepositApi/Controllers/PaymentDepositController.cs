@@ -9,6 +9,7 @@ using Service.PaymentDeposit.Grpc;
 using Service.PaymentDeposit.Grpc.Models;
 using Service.PaymentDepositApi.Mappers;
 using Service.PaymentDepositApi.Models;
+using Service.PaymentDepositRepository.Domain.Models;
 using Service.Web;
 
 namespace Service.PaymentDepositApi.Controllers
@@ -32,13 +33,16 @@ namespace Service.PaymentDepositApi.Controllers
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
 			DepositGrpcResponse response = await _paymentDepositService.TryCall(service => service.DepositAsync(request.ToGrpcModel(userId)));
-			if (response.Approved)
-				return StatusResponse.Ok();
 
-			if (response.RedirectUrl != null)
-				return DataResponse<DepositResponse>.Ok(new DepositResponse(response.RedirectUrl));
-
-			return StatusResponse.Error();
+			switch (response.State)
+			{
+				case TransactionState.Accepted when response.RedirectUrl != null:
+					return DataResponse<DepositResponse>.Ok(new DepositResponse(response.RedirectUrl));
+				case TransactionState.Approved:
+					return StatusResponse.Ok();
+				default:
+					return StatusResponse.Error();
+			}
 		}
 
 		[AllowAnonymous]
