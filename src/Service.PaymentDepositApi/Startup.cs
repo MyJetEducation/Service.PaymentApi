@@ -27,8 +27,16 @@ namespace Service.PaymentDepositApi
 			services.SetupSwaggerDocumentation(DocumentName, ApiName);
 			services.ConfigurateHeaders();
 			services.AddControllers();
+
+			services.AddCors(options =>
+			{
+				options.AddPolicy("CorsApi",
+					builder => builder.WithOrigins("http://localhost:3000", "http://localhost")
+						.AllowAnyHeader()
+						.AllowAnyMethod());
+			});
+
 			services.ConfigureAuthentication();
-			services.AddCors();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -36,13 +44,9 @@ namespace Service.PaymentDepositApi
 			if (env.IsDevelopment())
 				app.UseDeveloperExceptionPage();
 
-			app.UseCors(builder => builder
-				.AllowAnyOrigin()
-				.AllowAnyMethod()
-				.AllowAnyHeader());
-
 			app.UseForwardedHeaders();
 			app.UseRouting();
+			app.UseCors("CorsApi"); //TODO: temporary
 			app.UseStaticFiles();
 			app.UseMetricServer();
 			app.BindServicesTree(Assembly.GetExecutingAssembly());
