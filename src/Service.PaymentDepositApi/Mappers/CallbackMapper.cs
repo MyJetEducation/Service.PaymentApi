@@ -17,11 +17,11 @@ namespace Service.PaymentDepositApi.Mappers
 		{
 			switch (state)
 			{
-				case "approved":
+				case "approve":
 					return TransactionState.Approved;
-				case "accepted":
+				case "accept":
 					return TransactionState.Accepted;
-				case "rejected":
+				case "reject":
 					return TransactionState.Rejected;
 			}
 			return TransactionState.Error;
