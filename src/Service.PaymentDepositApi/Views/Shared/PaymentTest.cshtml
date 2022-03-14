@@ -6,10 +6,37 @@
 
 <html>
 <head>
+    <style type="text/css">
+        @@keyframes spinner {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #mySpinner {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .spinner:before {
+            content: '';
+            box-sizing: border-box;
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            border-top-color: #000;
+            animation: spinner .6s linear infinite;
+            display: inline-block;
+        }
+        </style>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
     <script>
         $(function() {
-            
+
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
@@ -42,6 +69,8 @@
                     loginFormObject[v.name] = v.value;
                 });
 
+                $('#mySpinner').addClass('spinner');
+
                 $.ajax({
                     headers: {
                         'Authorization': 'Bearer ' + window.token
@@ -60,6 +89,9 @@
                     },
                     error: function(xhr, desc, err) {
                         alert("error");
+                    },
+                    complete: function() {
+                        $('#mySpinner').removeClass('spinner');
                     },
                     contentType: "application/json"
                 });
@@ -82,6 +114,7 @@
         <p><label>year: </label><input type="text" name="year" value="22" /></p>
         <p><label>cvv: </label><input type="text" name="cvv" value="345" /></p>
         <input type="submit" value="OK"/>
+        <div id="mySpinner"></div>
     </form>
 </div>
 </body>
