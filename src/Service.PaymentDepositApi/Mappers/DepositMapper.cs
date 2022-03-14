@@ -12,6 +12,7 @@ namespace Service.PaymentDepositApi.Mappers
 			Amount = request.Amount,
 			Currency = request.Currency,
 			Country = request.Country,
+			ServiceCode = request.ServiceCode,
 			Number = request.Number,
 			Holder = request.Holder,
 			Month = request.Month,
