@@ -34,6 +34,9 @@ namespace Service.PaymentDepositApi.Controllers
 
 			DepositGrpcResponse response = await _paymentDepositService.TryCall(service => service.DepositAsync(request.ToGrpcModel(userId)));
 
+			if (response.RedirectUrl != null)
+				return DataResponse<DepositResponse>.Ok(new DepositResponse(response.RedirectUrl));
+
 			switch (response.State)
 			{
 				case TransactionState.Accepted when response.RedirectUrl != null:
