@@ -78,7 +78,7 @@
                     type: "POST",
                     dataType: "json",
                     data: JSON.stringify(loginFormObject),
-                    url: "/api/v1/paymentdeposit/deposit",
+                    url: "/api/v1/payment/deposit/register",
                     success: function(response) {
                         if (response.status === -1)
                             alert("error");

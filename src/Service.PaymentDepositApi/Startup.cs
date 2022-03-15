@@ -16,7 +16,7 @@ namespace Service.PaymentDepositApi
 {
 	public class Startup
 	{
-		private const string DocumentName = "paymentdeposit";
+		private const string DocumentName = "payment";
 		private const string ApiName = "PaymentDepositApi";
 
 		public void ConfigureServices(IServiceCollection services)
@@ -53,8 +53,8 @@ namespace Service.PaymentDepositApi
 				endpoints.MapControllers();
 				endpoints.MapGet("/", async context => await context.Response.WriteAsync("API endpoint"));
 				
-				endpoints.MapGet("/api/v1/paymentdeposit/payment-ok", async context => await context.Response.WriteAsync("Payment COMPLETE!")); //to-do: remove
-				endpoints.MapGet("/api/v1/paymentdeposit/payment-fail", async context => await context.Response.WriteAsync("Payment FAIL!")); //to-do: remove
+				endpoints.MapGet("/api/v1/payment/deposit/payment-ok", async context => await context.Response.WriteAsync("This is payment COMPLETE page!")); //to-do: remove
+				endpoints.MapGet("/api/v1/payment/deposit/payment-fail", async context => await context.Response.WriteAsync("This is payment FAIL page!")); //to-do: remove
 			});
 		}
 

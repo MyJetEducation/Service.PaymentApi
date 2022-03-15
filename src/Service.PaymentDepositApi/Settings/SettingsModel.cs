@@ -16,5 +16,8 @@ namespace Service.PaymentDepositApi.Settings
 
         [YamlProperty("PaymentDepositApi.PaymentDepositServiceUrl")]
         public string PaymentDepositServiceUrl { get; set; }
+
+        [YamlProperty("PaymentDepositApi.UserPaymentCardServiceUrl")]
+        public string UserPaymentCardServiceUrl { get; set; }
     }
 }
