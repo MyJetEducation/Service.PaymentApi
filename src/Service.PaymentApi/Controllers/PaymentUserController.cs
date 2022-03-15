@@ -23,14 +23,14 @@ namespace Service.PaymentApi.Controllers
 
 		[Authorize]
 		[HttpGet("cards")]
-		[SwaggerResponse(HttpStatusCode.OK, typeof (UserPaymentCardModel[]), Description = "Status")]
+		[SwaggerResponse(HttpStatusCode.OK, typeof(UserPaymentCardModel[]), Description = "Status")]
 		public async ValueTask<IActionResult> CardsAsync()
 		{
 			Guid? userId = GetUserId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
-			CardsInfoGrpcResponse cardsResponse = await _userPaymentCardService.Service.GetCardNamesAsync(new GetCardsInfoGrpcRequest {UserId = userId});
+			CardsInfoGrpcResponse cardsResponse = await _userPaymentCardService.Service.GetCardNamesAsync(new GetCardsInfoGrpcRequest { UserId = userId });
 
 			CardsInfoGrpcModel[] cards = cardsResponse?.Items;
 			if (cards == null)

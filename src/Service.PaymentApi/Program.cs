@@ -53,7 +53,7 @@ namespace Service.PaymentApi
 						}).UseStartup<Startup>())
 					.ConfigureServices(services => services
 						.AddSingleton(loggerFactory)
-						.AddSingleton(typeof (ILogger<>), typeof (Logger<>)))
+						.AddSingleton(typeof(ILogger<>), typeof(Logger<>)))
 					.Build().Run();
 
 				logger.LogInformation("Application has been stopped");

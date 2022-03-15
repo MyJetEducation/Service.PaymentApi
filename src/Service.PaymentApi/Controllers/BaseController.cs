@@ -12,6 +12,6 @@ namespace Service.PaymentApi.Controllers
 	[SwaggerResponse(HttpStatusCode.Unauthorized, null, Description = "Unauthorized")]
 	public abstract class BaseController : Controller
 	{
-		protected Guid? GetUserId() => Guid.TryParse(User.Identity?.Name, out Guid uid) ? (Guid?) uid : null;
+		protected Guid? GetUserId() => Guid.TryParse(User.Identity?.Name, out Guid uid) ? (Guid?)uid : null;
 	}
 }

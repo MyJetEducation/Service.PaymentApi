@@ -24,7 +24,7 @@ namespace Service.PaymentApi.Controllers
 
 		[Authorize]
 		[HttpPost("register")]
-		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<DepositResponse>))]
+		[SwaggerResponse(HttpStatusCode.OK, typeof(DataResponse<DepositResponse>))]
 		[SwaggerResponse(HttpStatusCode.Redirect, null, Description = "Redirect to external payment validator")]
 		public async ValueTask<IActionResult> RegisterDepositAsync([FromBody] DepositRequest request)
 		{
@@ -50,7 +50,7 @@ namespace Service.PaymentApi.Controllers
 
 		[AllowAnonymous]
 		[HttpGet("callback-test")]
-		[SwaggerResponse(HttpStatusCode.OK, typeof (StatusResponse), Description = "Status")]
+		[SwaggerResponse(HttpStatusCode.OK, typeof(StatusResponse), Description = "Status")]
 		public async ValueTask<IActionResult> CallbackDepositTestAsync([FromQuery] CallbackTestRequest request)
 		{
 			await _paymentDepositService.Service.CallbackAsync(request.ToGrpcModel());

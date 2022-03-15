@@ -1,9 +1,9 @@
 ﻿namespace Service.PaymentApi.Models
 {
-    public class DepositResponse
-    {
-	    public DepositResponse(string redirectUrl) => RedirectUrl = redirectUrl;
+	public class DepositResponse
+	{
+		public DepositResponse(string redirectUrl) => RedirectUrl = redirectUrl;
 
-	    public string RedirectUrl { get; set; }
-    }
+		public string RedirectUrl { get; set; }
+	}
 }

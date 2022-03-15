@@ -2,16 +2,16 @@
 
 namespace Service.PaymentApi.Tests
 {
-    public class TestExample
-    {
-        [SetUp]
-        public void Setup()
-        {
-        }
+	public class TestExample
+	{
+		[SetUp]
+		public void Setup()
+		{
+		}
 
-        [Test]
-        public void Test()
-        {
-        }
-    }
+		[Test]
+		public void Test()
+		{
+		}
+	}
 }

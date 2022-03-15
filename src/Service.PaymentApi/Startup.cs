@@ -52,7 +52,7 @@ namespace Service.PaymentApi
 			{
 				endpoints.MapControllers();
 				endpoints.MapGet("/", async context => await context.Response.WriteAsync("API endpoint"));
-				
+
 				endpoints.MapGet("/api/v1/payment/deposit/payment-ok", async context => await context.Response.WriteAsync("This is payment COMPLETE page!")); //to-do: remove
 				endpoints.MapGet("/api/v1/payment/deposit/payment-fail", async context => await context.Response.WriteAsync("This is payment FAIL page!")); //to-do: remove
 			});

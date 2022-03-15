@@ -8,7 +8,7 @@ namespace Service.PaymentApi.Models
 	{
 		[Required, FromQuery(Name = "transaction-id")]
 		public Guid? TransactionId { get; set; }
-		
+
 		[FromQuery(Name = "external-id")]
 		public string ExternalId { get; set; }
 
