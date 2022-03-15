@@ -13,6 +13,7 @@ namespace Service.PaymentApi.Mappers
 			Currency = request.Currency,
 			Country = request.Country,
 			ServiceCode = request.ServiceCode,
+			CardId = request.CardId,
 			Number = request.Number,
 			Holder = request.Holder,
 			Month = request.Month,
