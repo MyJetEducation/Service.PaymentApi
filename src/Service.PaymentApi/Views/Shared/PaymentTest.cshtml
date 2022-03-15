@@ -63,11 +63,20 @@
                     return;
                 }
 
-                var array = $(this).serializeArray();
-                var loginFormObject = {};
-                $.each(array, function(i, v) {
-                    loginFormObject[v.name] = v.value;
-                });
+                var cardId = $("input[name='cardid']").val();
+
+                var loginFormObject = {
+                    'Amount': $("input[name='amount']").val(),
+                    'Currency': $("input[name='currency']").val(),
+                    'Country': $("input[name='country']").val(),
+                    'ServiceCode': $("input[name='serviceCode']").val(),
+                    'CardId': cardId.length > 0 ? cardId : null,
+                    'Number': $("input[name='number']").val(),
+                    'Holder': $("input[name='holder']").val(),
+                    'Month': $("input[name='month']").val(),
+                    'Year': $("input[name='year']").val(),
+                    'Cvv': $("input[name='cvv']").val()
+                };
 
                 $('#mySpinner').addClass('spinner');
 
