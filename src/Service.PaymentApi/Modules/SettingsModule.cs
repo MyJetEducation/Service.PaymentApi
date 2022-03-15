@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-namespace Service.PaymentDepositApi.Modules
+namespace Service.PaymentApi.Modules
 {
     public class SettingsModule : Module
     {

@@ -1,4 +1,4 @@
-﻿namespace Service.PaymentDepositApi.Models
+﻿namespace Service.PaymentApi.Models
 {
     public class DepositResponse
     {

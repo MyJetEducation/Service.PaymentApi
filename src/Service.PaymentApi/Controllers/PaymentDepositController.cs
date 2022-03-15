@@ -7,12 +7,12 @@ using NSwag.Annotations;
 using Service.Grpc;
 using Service.PaymentDeposit.Grpc;
 using Service.PaymentDeposit.Grpc.Models;
-using Service.PaymentDepositApi.Mappers;
-using Service.PaymentDepositApi.Models;
+using Service.PaymentApi.Mappers;
+using Service.PaymentApi.Models;
 using Service.PaymentDepositRepository.Domain.Models;
 using Service.Web;
 
-namespace Service.PaymentDepositApi.Controllers
+namespace Service.PaymentApi.Controllers
 {
 	[OpenApiTag("PaymentDeposit", Description = "payment deposit")]
 	[Route("/api/v1/payment/deposit")]

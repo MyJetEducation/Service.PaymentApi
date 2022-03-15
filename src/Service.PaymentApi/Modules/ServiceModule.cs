@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Service.PaymentDeposit.Client;
 using Service.UserPaymentCard.Client;
 
-namespace Service.PaymentDepositApi.Modules
+namespace Service.PaymentApi.Modules
 {
     public class ServiceModule : Module
     {

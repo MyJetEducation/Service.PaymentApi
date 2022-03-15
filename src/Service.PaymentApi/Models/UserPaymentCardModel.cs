@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Service.PaymentDepositApi.Models
+namespace Service.PaymentApi.Models
 {
 	public class UserPaymentCardModel
 	{

@@ -32,7 +32,7 @@ jobs:
       run: ls
 
     - name: Publish Service
-      run: dotnet publish ./src/Service.PaymentDepositApi/Service.PaymentDepositApi.csproj --configuration Release /p:AssemblyVersion=${GITHUB_REF#refs/tags/} --output ./publish-api
+      run: dotnet publish ./src/Service.PaymentApi/Service.PaymentApi.csproj --configuration Release /p:AssemblyVersion=${GITHUB_REF#refs/tags/} --output ./publish-api
 
     - name: Check Service dir
       run: ls ./publish-api
@@ -49,6 +49,6 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
         path: ./publish-api
         registry: ghcr.io
-        repository: ${{ secrets.ORG_NAME }}/service.paymentdepositapi/service.paymentdepositapi
+        repository: ${{ secrets.ORG_NAME }}/service.paymentapi/service.paymentapi
         tag_with_ref: true
-        build_args: app_version=service.paymentdepositapi:${{ steps.extract_branch.outputs.branch }},app_compilation_date=${{ steps.current-time.outputs.formattedTime }}
+        build_args: app_version=service.paymentapi:${{ steps.extract_branch.outputs.branch }},app_compilation_date=${{ steps.current-time.outputs.formattedTime }}

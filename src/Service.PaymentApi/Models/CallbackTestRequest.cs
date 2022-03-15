@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Service.PaymentDepositApi.Models
+namespace Service.PaymentApi.Models
 {
 	public class CallbackTestRequest
 	{

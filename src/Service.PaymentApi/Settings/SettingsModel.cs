@@ -1,23 +1,23 @@
 ﻿using MyJetWallet.Sdk.Service;
 using MyYamlParser;
 
-namespace Service.PaymentDepositApi.Settings
+namespace Service.PaymentApi.Settings
 {
     public class SettingsModel
     {
-        [YamlProperty("PaymentDepositApi.SeqServiceUrl")]
+        [YamlProperty("PaymentApi.SeqServiceUrl")]
         public string SeqServiceUrl { get; set; }
 
-        [YamlProperty("PaymentDepositApi.ZipkinUrl")]
+        [YamlProperty("PaymentApi.ZipkinUrl")]
         public string ZipkinUrl { get; set; }
 
-        [YamlProperty("PaymentDepositApi.ElkLogs")]
+        [YamlProperty("PaymentApi.ElkLogs")]
         public LogElkSettings ElkLogs { get; set; }
 
-        [YamlProperty("PaymentDepositApi.PaymentDepositServiceUrl")]
+        [YamlProperty("PaymentApi.PaymentDepositServiceUrl")]
         public string PaymentDepositServiceUrl { get; set; }
 
-        [YamlProperty("PaymentDepositApi.UserPaymentCardServiceUrl")]
+        [YamlProperty("PaymentApi.UserPaymentCardServiceUrl")]
         public string UserPaymentCardServiceUrl { get; set; }
     }
 }

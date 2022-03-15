@@ -1,8 +1,8 @@
 ﻿using System;
 using Service.PaymentDeposit.Grpc.Models;
-using Service.PaymentDepositApi.Models;
+using Service.PaymentApi.Models;
 
-namespace Service.PaymentDepositApi.Mappers
+namespace Service.PaymentApi.Mappers
 {
 	public static class DepositMapper
 	{

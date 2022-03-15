@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Service.PaymentDepositApi.Tests
+namespace Service.PaymentApi.Tests
 {
     public class TestExample
     {

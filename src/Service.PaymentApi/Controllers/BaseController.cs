@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
-namespace Service.PaymentDepositApi.Controllers
+namespace Service.PaymentApi.Controllers
 {
 	[ApiController]
 	[ProducesResponseType(StatusCodes.Status200OK)]

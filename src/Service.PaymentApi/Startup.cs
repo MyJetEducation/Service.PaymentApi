@@ -8,16 +8,16 @@ using Microsoft.Extensions.Hosting;
 using MyJetWallet.Sdk.Service;
 using Prometheus;
 using Service.Core.Client.Constants;
-using Service.PaymentDepositApi.Modules;
+using Service.PaymentApi.Modules;
 using Service.Web;
 using SimpleTrading.ServiceStatusReporterConnector;
 
-namespace Service.PaymentDepositApi
+namespace Service.PaymentApi
 {
 	public class Startup
 	{
 		private const string DocumentName = "payment";
-		private const string ApiName = "PaymentDepositApi";
+		private const string ApiName = "PaymentApi";
 
 		public void ConfigureServices(IServiceCollection services)
 		{

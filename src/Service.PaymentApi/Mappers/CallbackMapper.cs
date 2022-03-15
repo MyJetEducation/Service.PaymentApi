@@ -1,8 +1,8 @@
-﻿using Service.PaymentDeposit.Grpc.Models;
-using Service.PaymentDepositApi.Models;
+﻿using Service.PaymentApi.Models;
+using Service.PaymentDeposit.Grpc.Models;
 using Service.PaymentDepositRepository.Domain.Models;
 
-namespace Service.PaymentDepositApi.Mappers
+namespace Service.PaymentApi.Mappers
 {
 	public static class CallbackMapper
 	{

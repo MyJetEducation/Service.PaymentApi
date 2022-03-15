@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MyJetWallet.Sdk.Service;
 
-namespace Service.PaymentDepositApi
+namespace Service.PaymentApi
 {
     public class ApplicationLifetimeManager : ApplicationLifetimeManagerBase
     {

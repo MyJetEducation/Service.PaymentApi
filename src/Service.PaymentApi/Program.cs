@@ -10,9 +10,9 @@ using MyJetWallet.Sdk.Service;
 using MySettingsReader;
 using Service.Core.Client.Constants;
 using Service.Core.Client.Helpers;
-using Service.PaymentDepositApi.Settings;
+using Service.PaymentApi.Settings;
 
-namespace Service.PaymentDepositApi
+namespace Service.PaymentApi
 {
 	public class Program
 	{
@@ -22,7 +22,7 @@ namespace Service.PaymentDepositApi
 
 		public static void Main(string[] args)
 		{
-			Console.Title = "MyJetEducation Service.PaymentDepositApi";
+			Console.Title = "MyJetEducation Service.PaymentApi";
 			Settings = LoadSettings();
 
 			using ILoggerFactory loggerFactory = LogConfigurator.ConfigureElk(Configuration.ProductName, Settings.SeqServiceUrl, Settings.ElkLogs);

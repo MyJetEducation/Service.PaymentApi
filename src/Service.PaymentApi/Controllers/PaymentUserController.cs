@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using Service.Grpc;
-using Service.PaymentDepositApi.Models;
+using Service.PaymentApi.Models;
 using Service.UserPaymentCard.Grpc;
 using Service.UserPaymentCard.Grpc.Models;
 using Service.Web;
 
-namespace Service.PaymentDepositApi.Controllers
+namespace Service.PaymentApi.Controllers
 {
 	[OpenApiTag("PaymentUser", Description = "user payment utils")]
 	[Route("/api/v1/payment/user")]
