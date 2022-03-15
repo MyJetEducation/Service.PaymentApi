@@ -7,10 +7,10 @@ namespace Service.PaymentApi.Controllers
 	///     to-do: remove
 	/// </summary>
 	[OpenApiTag("PaymentTest", Description = "payment test")]
-	[Route("/api/v1/payment/test")]
+	[Route("/api/v1/payment/deposit")]
 	public class PaymentTestController : BaseController
 	{
-		[HttpGet("payment")]
+		[HttpGet("test")]
 		public ViewResult PaymentTest() => View("PaymentTest");
 	}
 }

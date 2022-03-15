@@ -44,6 +44,7 @@
     <PackageReference Include="MyJetEducation.Service.ServiceBus" Version="1.0.17" />
     <PackageReference Include="MyJetEducation.Service.Grpc" Version="1.0.7" />
     <PackageReference Include="MyJetEducation.Service.Web" Version="1.0.3" />
+    <PackageReference Include="MyJetEducation.Service.ServiceBus" Version="1.0.17" />
   </ItemGroup>
 
   <ItemGroup>
