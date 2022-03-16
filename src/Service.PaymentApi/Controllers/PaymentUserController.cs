@@ -22,7 +22,7 @@ namespace Service.PaymentApi.Controllers
 		public PaymentUserController(IGrpcServiceProxy<IUserPaymentCardService> userPaymentCardService) => _userPaymentCardService = userPaymentCardService;
 
 		[Authorize]
-		[HttpGet("cards")]
+		[HttpPost("cards")]
 		[SwaggerResponse(HttpStatusCode.OK, typeof(UserPaymentCardModel[]), Description = "Status")]
 		public async ValueTask<IActionResult> CardsAsync()
 		{

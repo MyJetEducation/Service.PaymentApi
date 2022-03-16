@@ -8,9 +8,14 @@
 <head>
     <style type="text/css">
         @@keyframes spinner {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
+        }
+
+        input, select { width: 300px; }
+
+        label {
+            width: 70px;
+            display: inline-block;
         }
 
         #mySpinner {
@@ -32,8 +37,10 @@
             animation: spinner .6s linear infinite;
             display: inline-block;
         }
-        </style>
+    </style>
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+
     <script>
         $(function() {
 
@@ -43,14 +50,55 @@
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: "/api/v1/auth/login",
+                url: "https://api.dfnt.work/api/v1/auth/login",
                 data: JSON.stringify({ "userName": "user@domain.com", "password": "Qwerty+123" }),
                 dataType: "json",
                 success: function(result) {
-                    window.token = result.data.token;
+                    var token = result.data.token;
+                    window.token = token;
+                    if (token != null)
+                        fillCards();
                 },
-                error: function(jqXhr, exception) {
-                    alert(jqXhr.responseText + "\r\n" + jqXhr.statusText);
+                error: function(xhr) {
+                    alert(`error: ${xhr.responseText}\r\n${xhr.statusText}`);
+                }
+            });
+
+            var cardIdSelect = $("select[name='cardid']");
+
+            function fillCards() {
+                $.ajax({
+                    headers: { 'Authorization': 'Bearer ' + window.token },
+                    type: "POST",
+                    url: "/api/v1/payment/user/cards",
+                    dataType: "json",
+                    success: function(result) {
+                        if (!result || result.status !== 0)
+                            return;
+
+                        $.each(result.data, function(index, value) {
+                            cardIdSelect.append(`<option value="${value.cardId}">${value.cardName}${value.isDefault === true ? ' (default)' : ''}</option>`);
+                        });
+                    },
+                    error: function(xhr) {
+                        console.log(`error: ${xhr.responseText}\r\n${xhr.statusText}`);
+                    }
+                });
+            }
+
+            var cardFields = ['number', 'holder', 'month', 'year', 'cvv'];
+
+            $.each(cardFields, function(index, value) {
+                $("input[name='" + value + "']").change(function() {
+                    cardIdSelect.val("");
+                });
+            });
+
+            cardIdSelect.change(function() {
+                if (this.value) {
+                    $.each(cardFields, function(index, value) {
+                        $("input[name='" + value + "']").val("");
+                    });
                 }
             });
 
@@ -59,23 +107,29 @@
 
                 var token = window.token;
                 if (token == null) {
-                    alert("No token!");
+                    alert("Error: no auth token!");
                     return;
                 }
 
-                var cardId = $("input[name='cardid']").val();
+                var valOrNull = function(val) {
+                    return val.length > 0 ? val : null;
+                };
+                var inputValOrNull = function(name) {
+                    var val = $("input[name='" + name + "']").val();
+                    return valOrNull(val);
+                };
 
                 var loginFormObject = {
-                    'Amount': $("input[name='amount']").val(),
-                    'Currency': $("input[name='currency']").val(),
-                    'Country': $("input[name='country']").val(),
-                    'ServiceCode': $("input[name='serviceCode']").val(),
-                    'CardId': cardId.length > 0 ? cardId : null,
-                    'Number': $("input[name='number']").val(),
-                    'Holder': $("input[name='holder']").val(),
-                    'Month': $("input[name='month']").val(),
-                    'Year': $("input[name='year']").val(),
-                    'Cvv': $("input[name='cvv']").val()
+                    'Amount': inputValOrNull('amount'),
+                    'Currency': inputValOrNull('currency'),
+                    'Country': inputValOrNull('country'),
+                    'ServiceCode': inputValOrNull('serviceCode'),
+                    'CardId': valOrNull(cardIdSelect.val()),
+                    'Number': inputValOrNull('number'),
+                    'Holder': inputValOrNull('holder'),
+                    'Month': inputValOrNull('month'),
+                    'Year': inputValOrNull('year'),
+                    'Cvv': inputValOrNull('cvv')
                 };
 
                 $('#mySpinner').addClass('spinner');
@@ -96,8 +150,8 @@
                         if (response.status === 0)
                             window.location = response.data.redirectUrl;
                     },
-                    error: function(xhr, desc, err) {
-                        alert("error");
+                    error: function(xhr) {
+                        alert(`error: ${xhr.responseText}\r\n${xhr.statusText}`);
                     },
                     complete: function() {
                         $('#mySpinner').removeClass('spinner');
@@ -117,13 +171,13 @@
         <p><label>currency: </label><input type="text" name="currency" value="USD" /></p>
         <p><label>country: </label><input type="text" name="country" value="USA" /></p>
         <p><label>service: </label><input type="text" name="serviceCode" value="retry_pack" /></p>
-        <p><label>card: </label><input type="text" name="cardid" value="" /></p>
+        <p><label>card: </label><select name="cardid"><option></option></select></p>
         <p><label>number: </label><input type="text" name="number" value="1234123412341234" /></p>
         <p><label>holder: </label><input type="text" name="holder" value="Peter Falk" /></p>
         <p><label>month: </label><input type="text" name="month" value="01" /></p>
         <p><label>year: </label><input type="text" name="year" value="22" /></p>
         <p><label>cvv: </label><input type="text" name="cvv" value="345" /></p>
-        <input type="submit" value="OK"/>
+        <button type="submit"><b>Pay</b></button>
         <div id="mySpinner"></div>
     </form>
 </div>
