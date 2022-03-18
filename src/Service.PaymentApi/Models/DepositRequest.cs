@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Service.Core.Client.Extensions;
-using static System.Double;
+using Service.PaymentApi.Attributes;
 
 namespace Service.PaymentApi.Models
 {
 	public class DepositRequest
 	{
-		[Required, Range(Epsilon, MaxValue, ErrorMessage = "The field Amount must be greater than 0")]
+		[Required, RequiredGreaterThanZero(ErrorMessage = "The field Amount must be greater than 0")]
 		public decimal Amount { get; set; }
 
 		[Required]
