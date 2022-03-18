@@ -59,6 +59,7 @@
 
   <ItemGroup>
     <Folder Include="Mappers\" />
+    <Folder Include="Constants\" />
   </ItemGroup>
 
 </Project>

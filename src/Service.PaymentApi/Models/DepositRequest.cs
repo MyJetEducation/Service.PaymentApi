@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Service.Core.Client.Extensions;
+using static System.Double;
 
 namespace Service.PaymentApi.Models
 {
 	public class DepositRequest
 	{
-		[Required]
+		[Required, Range(Epsilon, MaxValue, ErrorMessage = "The field Amount must be greater than 0")]
 		public decimal Amount { get; set; }
 
 		[Required]
@@ -28,5 +30,11 @@ namespace Service.PaymentApi.Models
 		public string Year { get; set; }
 
 		public string Cvv { get; set; }
+
+		public bool CheckCardNotFilled() => Number.IsNullOrWhiteSpace()
+			|| Cvv.IsNullOrWhiteSpace()
+			|| Holder.IsNullOrWhiteSpace()
+			|| Month.IsNullOrWhiteSpace()
+			|| Year.IsNullOrWhiteSpace();
 	}
 }

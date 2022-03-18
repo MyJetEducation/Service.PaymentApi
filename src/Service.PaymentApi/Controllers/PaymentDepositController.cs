@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using Service.Grpc;
+using Service.PaymentApi.Constants;
 using Service.PaymentDeposit.Grpc;
 using Service.PaymentDeposit.Grpc.Models;
 using Service.PaymentApi.Mappers;
@@ -31,6 +32,9 @@ namespace Service.PaymentApi.Controllers
 			Guid? userId = GetUserId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
+
+			if (request.CardId == null && request.CheckCardNotFilled())
+				return StatusResponse.Error(PaymentResponseCode.CardDataNotFilled);
 
 			DepositGrpcResponse response = await _paymentDepositService.TryCall(service => service.DepositAsync(request.ToGrpcModel(userId)));
 
